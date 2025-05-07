@@ -11,10 +11,12 @@ def test_check_78():
 # function to test: { 'age': 12, 'name': ''Vasya' }
 @pytest.mark.check
 def check_if_adult(user):
-    if user['age'] >= 18:
-        return True
-    else:
-        return False
+    # if user['age'] >= 18:
+    #     return True
+    # else:
+    #     return False
+    # same as above:
+    return user['age'] >= 18
 
 @pytest.mark.check   
 def test_check_if_adult():
