@@ -14,8 +14,8 @@ import pytest
 #     api = GitHub()
 #     r = api.get_non_exist_user()
 #     assert r['message'] == 'Not Found' 
-# Перша версія пошуку існуючого та неіснуючого юзера,для порівняння тести 
-# з 19 по 28 рядок більш лаконічні і правильні   
+# The first version of the search for existing and non-existing users, for comparison tests 
+# lines 20 to 28 are more concise and correct  
 
 @pytest.mark.api
 def test_user_exists(github_api):
@@ -28,7 +28,7 @@ def test_user_not_exists(github_api):
     r = github_api.get_user('butenkosergii')
     assert r['message'] == 'Not Found'
 
-# користувач може знайти існуючій репозиторійій на ГітХАбі
+# user can find existing repository on GitHub
 @pytest.mark.api 
 def test_repo_can_be_found(github_api):
     r = github_api.search_repo('become-qa-auto')  
@@ -36,19 +36,19 @@ def test_repo_can_be_found(github_api):
     assert r['total_count'] == 57
     assert 'become-qa-auto' in r['items'][0]['name']
 
-# користувач може знайти неіснуючій реп ій на ГітХАбі
+# user can find a non-existent repo on GitHub
 @pytest.mark.api
 def test_repo_cannot_be_found(github_api):
     r = github_api.search_repo('sergiibutenko_repo_non_exist')
     assert r['total_count'] == 0
 
-# користувач може знайти репозиторій на ГітХАбі ім я якого один символ
+# user can find a repository on GitHub whose name is one character
 @pytest.mark.api
 def test_repo_with_single_char_be_found(github_api):
     r = github_api.search_repo('s')
     assert r['total_count'] != 0
 
-# Отримати список усіх Emoji
+# Get a list of all Emoji
 @pytest.mark.api
 def test_get_all_available_emoji(github_api):
     r = github_api.get_emojis()
@@ -58,7 +58,7 @@ def test_get_all_available_emoji(github_api):
     assert r['beers'] == 'https://github.githubassets.com/images/icons/emoji/unicode/1f37b.png?v8'
 
 
-# Перевірити наявність Emoji на ГітХаб
+# Check for Emoji on GitHub
 @pytest.mark.api
 def test_check_emoji_exists(github_api):
     r = github_api.check_emojis('beetle')
@@ -66,25 +66,26 @@ def test_check_emoji_exists(github_api):
     assert r == True
 
 
-# Перевірити відсутність Emoji на ГітХаб
+# Check for missing Emoji on GitHub
 @pytest.mark.api
 def test_check_emoji_absence(github_api):
     r = github_api.check_emojis('ghjkhiuh')
 
     assert r == False
 
-#Перевірка наявності в репозиторіі гілки main
+# Checking the presence of the main branch in the repository
 @pytest.mark.api
 def test_repo_has_main_branch(github_api):
     r = github_api.get_branches('VikaH', 'QA_Auto')
 
     assert r[0]['name'] == 'main'
 
-#Перевірка наявності в репозиторіі гілки master
+# Checking the presence of the master branch in the repository
 @pytest.mark.api
 def test_repo_has_master_branch(github_api):
     r = github_api.get_branches('noJokesCoder', 'project_final')
 
     assert r[0]['name'] == 'master'
+
 
 

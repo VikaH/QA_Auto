@@ -9,11 +9,11 @@ class UZ_booking(BasePage):
     def __init__(self) -> None:
         super().__init__()
 
-    # Метод який відкриває сторінку по заданому юрл
+    # Method that opens a page at a given URL
     def go_to(self):
         self.driver.get(UZ_booking.URL)
 
-    # Метод що встановлює значення відправлення
+    # Method that sets the value of the dispatch
     def try_set_departure(self, depart_city):
         depart_elem = self.driver.find_element(By.ID, "headlessui-combobox-input-v-0-0-0")
 
@@ -23,7 +23,7 @@ class UZ_booking(BasePage):
         select_option = self.driver.find_element(By.CSS_SELECTOR, "ul[role=listbox] > li:first-child")
         select_option.click()
     
-    # Метод що встановлює значення прибуття
+    # Method that sets the arrival value
     def try_set_arrival(self, arrival_city):
         arrival_elem = self.driver.find_element(By.ID, "headlessui-combobox-input-v-0-0-3")
 
@@ -34,7 +34,7 @@ class UZ_booking(BasePage):
         select_option = self.driver.find_element(By.CSS_SELECTOR, "ul[role=listbox] > li:first-child")
         select_option.click()
 
-    # Метод що знаходить та клікає кнопку Знайти
+    # Method that finds and clicks the Find button
     def button_find(self):
         button = self.driver.find_element(By.CSS_SELECTOR, "button[type=submit]")
         button.click()
@@ -43,7 +43,7 @@ class UZ_booking(BasePage):
     def check_title(self, expected_title):
         return self.driver.title == expected_title
 
-# Проєктне завдання № 6
+# Project task No. 6
 @pytest.mark.uz
 def test_find_tickets():
     UZ_page = UZ_booking()
@@ -62,3 +62,4 @@ def test_find_tickets():
     page_title_is_correct = UZ_page.check_title("Квитки на потяг Київ-Пас — Львів | Укрзалізниця: квитки на потяг")
 
     assert page_title_is_correct == True
+
